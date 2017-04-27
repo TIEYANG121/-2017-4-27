@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div id="box">
+		<h1>{{num}}</h1>
+		<button v-on:click="add">按钮</button>
+	</div>
+	<script src="vue.js"></script>
+	<script src="vuex.js"></script>
+	<script>
+		var store = new Vuex.Store({
+			state:{
+				number:0
+			},
+			mutations:{
+				add:function(state){
+					state.number++;
+				}
+			}
+		});
+		new Vue({
+			el:"#box",
+			methods:{
+				add:function(){
+					store.commit('add');
+					
+				}
+			},
+			computed:{
+				num:function(){
+					return store.state.number;
+				}
+			}
+		})
+	</script>
+</body>
+</html>

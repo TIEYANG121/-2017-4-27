@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div id="box">
+	<myform></myform>
+	<mylist></mylist>
+	</div>
+	<script src="vue.js"></script>
+	<script src="vuex.js"></script>
+	<script>
+		Vue.component('myform',{
+			template:'<form v-on:submit.prevent="add">\
+			<input type="text" v-model="txt">\
+			<input type="submit" value="添加" />\
+			</form>',
+			data:function(){
+				return {
+					txt:''
+				}
+			},
+			methods:{
+				add:function(){
+					 store.commit('add',this.txt)
+				}
+			}
+		})
+		Vue.component('mylist',{
+			template:'<ul><li v-for="(val.ind) in fruitlist">{{val}}</li></ul>',
+			computed:{
+				fruitlist:function(){
+					return store.state.fruitlist
+				}
+			}
+		})
+		var store = new Vuex.Store({
+			state:{
+				fruitlist:["苹果","香蕉","鸭梨"]
+			},
+			mutations:{
+			  add:function(state,data){
+			  	state.fruitlist.push(data);		
+			  }
+			}
+		});
+		new Vue({
+			el:"#box",
+			
+			
+		})
+	</script>
+</body>
+</html>

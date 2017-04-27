@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div id="box">
+		
+		<button v-on:click="add">+</button>
+		<span>{{num}}</span>
+		<button v-on:click="dele">-</button>
+	</div>
+	<script src="vue.js"></script>
+	<script src="vuex.js"></script>
+	<script>
+		var store = new Vuex.Store({
+			state:{
+				number:0
+			},
+			mutations:{
+				add:function(state){
+					state.number++;
+				},
+				dele:function(state){
+					if(state.number>0){
+						num=0;
+						state.number--;
+					}
+					
+				}
+			}
+		});
+		new Vue({
+			el:"#box",
+			methods:{
+				add:function(){
+					store.commit('add');
+					
+				},
+				dele:function(){
+					store.commit('dele');
+					
+				}
+			},
+			computed:{
+				num:function(){
+					return store.state.number;
+				}
+			}
+		})
+	</script>
+</body>
+</html>
